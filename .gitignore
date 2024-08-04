@@ -1,3 +1,4 @@
 /client/money-tracker/node_modules
 /api/node_modules
 /client/money-tracker/.env
+/api/.env

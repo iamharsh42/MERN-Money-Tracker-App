@@ -6,19 +6,34 @@ function App() {
   const [datetime, setDatetime] = useState("");
   const [description, setDescription] = useState("");
 
-  function addNewTransaction(event) {
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+  // function addNewTransaction(event) {
+  //   event.preventDefault();
+  //   const url = process.env.REACT_APP_API_BASE_URL + "/transaction";
+  //   fetch(url, {
+  //     method: "POST",
+  //     headers: { "Content-type": "application/json" },
+  //     body: JSON.stringify({ name, description, datetime }),
+  //   }).then((response) => {
+  //     response.json().then((json) => {
+  //       console.log("result", json);
+  //     });
+  //   });
+  // }
+
+  const addNewTransaction = async (event) => {
     event.preventDefault();
-    const url = process.env.REACT_APP_API_BASE_URL + "/transaction";
-    fetch(url, {
+    const response = await fetch(`${API_BASE_URL}/transaction`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({ name, description, datetime }),
-    }).then((response) => {
-      response.json().then((json) => {
-        console.log("result", json);
-      });
     });
-  }
+
+    if (response.ok) {
+      console.log(response.json());
+    }
+  };
 
   return (
     <main>
