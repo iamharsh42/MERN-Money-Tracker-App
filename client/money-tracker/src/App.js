@@ -72,61 +72,64 @@ function App() {
   balance = balance.split(".")[0];
 
   return (
-    <main>
-      <h1>
-        ${balance}
-        <span>{fraction}</span>
-      </h1>
+    <div className="container">
+      <h1 className="title">Mern Money Tracker</h1>
+      <main>
+        <h1>
+          ${balance}
+          <span>{fraction}</span>
+        </h1>
 
-      <form onSubmit={addNewTransaction}>
-        <div className="basic">
-          <input
-            required
-            type="text"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            placeholder={"+200 new samsung tv"}
-          />
-          <input
-            required
-            type="datetime-local"
-            value={datetime}
-            onChange={(event) => setDatetime(event.target.value)}
-          />
-        </div>
-        <div className="description">
-          <input
-            required
-            type="text"
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            placeholder={"description"}
-          />
-        </div>
-        <button type="submit">Add new transaction</button>
-      </form>
-      <div className="transactions">
-        {transactions.length > 0 &&
-          transactions.map((transaction) => (
-            <div className="transaction">
-              <div className="left">
-                <div className="name">{transaction.name}</div>
-                <div className="description">{transaction.description}</div>
-              </div>
-              <div className="right">
-                <div
-                  className={
-                    "price " + (transaction.price < 0 ? "red" : "green")
-                  }
-                >
-                  {transaction.price}
+        <form onSubmit={addNewTransaction}>
+          <div className="basic">
+            <input
+              required
+              type="text"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              placeholder={"+200 new samsung tv"}
+            />
+            <input
+              required
+              type="datetime-local"
+              value={datetime}
+              onChange={(event) => setDatetime(event.target.value)}
+            />
+          </div>
+          <div className="description">
+            <input
+              required
+              type="text"
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+              placeholder={"description"}
+            />
+          </div>
+          <button type="submit">Add new transaction</button>
+        </form>
+        <div className="transactions">
+          {transactions.length > 0 &&
+            transactions.map((transaction) => (
+              <div className="transaction">
+                <div className="left">
+                  <div className="name">{transaction.name}</div>
+                  <div className="description">{transaction.description}</div>
                 </div>
-                <div className="datetime">{transaction.datetime}</div>
+                <div className="right">
+                  <div
+                    className={
+                      "price " + (transaction.price < 0 ? "red" : "green")
+                    }
+                  >
+                    {transaction.price}
+                  </div>
+                  <div className="datetime">{transaction.datetime}</div>
+                </div>
               </div>
-            </div>
-          ))}
-      </div>
-    </main>
+            ))}
+        </div>
+      </main>
+    </div>
   );
 }
 
