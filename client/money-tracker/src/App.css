@@ -3,8 +3,6 @@
 }
 
 body {
-  background: #17181f;
-  background: rgba(23, 24, 31, 0.9);
   background: #0f0f14;
   color: #ddd;
 }
@@ -15,7 +13,7 @@ body {
   border: 2px solid #30313d;
   border-radius: 12px;
   background: #17181f;
-  box-shadow: 5px 5px 10px #000;
+  box-shadow: 0 0 40px #34a8ba;
 }
 
 main {
@@ -113,4 +111,5 @@ form button {
 .title {
   margin-top: 15px;
   font-size: 3.5rem;
+  color: #ddd;
 }
