@@ -9,11 +9,11 @@ function App() {
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
-  useEffect(() => {
-    getTransactions().then((transactions) => {
-      setTransactions(transactions);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getTransactions().then((transactions) => {
+  //     setTransactions(transactions);
+  //   });
+  // }, [addNewTransaction]);
 
   const getTransactions = async () => {
     const response = await fetch(`${API_BASE_URL}/transactions`);
@@ -56,6 +56,12 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    getTransactions().then((transactions) => {
+      setTransactions(transactions);
+    });
+  }, [addNewTransaction]);
+
   let balance = 0;
   for (const transaction of transactions) {
     balance = balance + transaction.price;
@@ -75,12 +81,14 @@ function App() {
       <form onSubmit={addNewTransaction}>
         <div className="basic">
           <input
+            required
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder={"+200 new samsung tv"}
           />
           <input
+            required
             type="datetime-local"
             value={datetime}
             onChange={(event) => setDatetime(event.target.value)}
@@ -88,6 +96,7 @@ function App() {
         </div>
         <div className="description">
           <input
+            required
             type="text"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
