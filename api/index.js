@@ -14,11 +14,20 @@ app.get("/api/test", (req, res) => {
 
 app.post("/api/transaction", async (req, res) => {
   await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
-  const { name, description, datetime } = req.body;
-  const transaction = await Transaction.create({ name, description, datetime });
+  const { price, name, description, datetime } = req.body;
+  const transaction = await Transaction.create({
+    price,
+    name,
+    description,
+    datetime,
+  });
   res.json(transaction);
 });
 
-app.listen(5000);
+app.get("/api/transactions", async (req, res) => {
+  await mongoose.connect(process.env.MONGO_CONNECTION_STRING);
+  const transactions = await Transaction.find();
+  res.json(transactions);
+});
 
-// jx0OZzTReNaVY482
+app.listen(5000);
