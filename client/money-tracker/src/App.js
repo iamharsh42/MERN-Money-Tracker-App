@@ -16,7 +16,7 @@ function App() {
   // }, [addNewTransaction]);
 
   const getTransactions = async () => {
-    const response = await fetch(`${API_BASE_URL}/transactions`);
+    const response = await fetch(`${API_BASE_URL}/api/transactions`);
     return await response.json();
   };
 
@@ -37,7 +37,7 @@ function App() {
   const addNewTransaction = async (event) => {
     event.preventDefault();
     const price = name.split(" ")[0];
-    const response = await fetch(`${API_BASE_URL}/transaction`, {
+    const response = await fetch(`${API_BASE_URL}/api/transaction`, {
       method: "POST",
       headers: { "Content-type": "application/json" },
       body: JSON.stringify({
@@ -50,6 +50,9 @@ function App() {
 
     if (response.ok) {
       console.log(response.json());
+      getTransactions().then((transactions) => {
+        setTransactions(transactions);
+      });
       setName("");
       setDescription("");
       setDatetime("");
@@ -60,7 +63,7 @@ function App() {
     getTransactions().then((transactions) => {
       setTransactions(transactions);
     });
-  }, [addNewTransaction]);
+  }, []);
 
   let balance = 0;
   for (const transaction of transactions) {
@@ -105,7 +108,9 @@ function App() {
               placeholder={"description"}
             />
           </div>
-          <button type="submit">Add new transaction</button>
+          <button type="submit" onClick={console.log("clicked!")}>
+            Add new transaction
+          </button>
         </form>
         <div className="transactions">
           {transactions.length > 0 &&
